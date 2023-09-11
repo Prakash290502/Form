@@ -6,8 +6,7 @@ class App extends React.Component {
         
 		return (
 			<div className="userDetails">
-				<div className="row">
-					<div className="col-lg-12">
+				
                         <Formik
                                 initialValues={{ name: "", email: "", dob: "", password: "" }}
                                 validationSchema={LoginSchema}
@@ -61,6 +60,7 @@ class App extends React.Component {
                                             name="dob"
                                             type="dob"
                                             autocomplete="off"
+                                            placeholder="yyyy mm dd"
                                             className={` ${props.touched.dob && props.errors.dob ? "is-invalid" : ""}`}
                                             />
                                             <ErrorMessage
@@ -95,8 +95,7 @@ class App extends React.Component {
 							)}
 						</Formik>
 					</div>
-				</div>
-			</div>
+
 		);
 	}
 }
