@@ -31,7 +31,7 @@ class App extends React.Component {
                                         name="name"
                                         placeholder="Enter name"
                                         autocomplete="off"
-                                        className={`mt-1 form-control ${props.touched.name && props.errors.name ? "is-invalid" : ""}`}
+                                        className={` ${props.touched.name && props.errors.name ? "is-invalid" : ""}`}
                                         />
                                         <ErrorMessage
                                         component="div"
@@ -75,7 +75,7 @@ class App extends React.Component {
 											type="password"
 											name="password"
 											placeholder="Enter password"
-                                            className={`mt-3 form-control ${props.touched.password && props.errors.password ? "is-invalid" : ""}`}
+                                            className={` ${props.touched.password && props.errors.password ? "is-invalid" : ""}`}
 										/>
                                         <ErrorMessage
                                         component="div"
@@ -115,8 +115,7 @@ const LoginSchema = Yup.object().shape({
 	password: Yup.string()
 
 		//Minimum Character Validation
-		.min(5, "Password must be 3 characters at minimum")
-        
+		.min(5, "Password must be 5 characters at minimum")
 		.required("Password is required"),
         dob:Yup.date().required("DOB is required")
         .min(new Date("2000/01/01"),"DOB must be after 2000")
