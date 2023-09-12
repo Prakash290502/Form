@@ -30,7 +30,7 @@ class App extends React.Component {
                                         type="name"
                                         name="name"
                                         placeholder="Enter name"
-                                        autocomplete="off"
+                                        autoComplete="off"
                                         className={` ${props.touched.name && props.errors.name ? "is-invalid" : ""}`}
                                         />
                                         <ErrorMessage
@@ -45,13 +45,13 @@ class App extends React.Component {
                                         type="email"
                                         name="email"
                                         placeholder="Enter email"
-                                        autocomplete="off"
+                                        autoComplete="off"
                                         className={` ${props.touched.email && props.errors.email ? "is-invalid" : ""}`}
                                         />
                                         <ErrorMessage
                                         component="div"
                                         name="email"
-                                        className="invalid-feedback"
+                                        className="error"
                                         />
 										</div>
                                         <div className="form-group">
@@ -59,7 +59,7 @@ class App extends React.Component {
                                             <Field
                                             name="dob"
                                             type="dob"
-                                            autocomplete="off"
+                                            autoComplete="off"
                                             placeholder="yyyy mm dd"
                                             className={` ${props.touched.dob && props.errors.dob ? "is-invalid" : ""}`}
                                             />
@@ -74,6 +74,7 @@ class App extends React.Component {
 										<Field
 											type="password"
 											name="password"
+                                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 											placeholder="Enter password"
                                             className={` ${props.touched.password && props.errors.password ? "is-invalid" : ""}`}
 										/>
@@ -123,7 +124,7 @@ const LoginSchema = Yup.object().shape({
 
 });
 
-const isSubmitting =()=>{isSubmitting ? 
-    (<h1>Login Page</h1>) : (<h1>Confirmation of Login</h1>)
-}
+const isSubmitting =false;
+isSubmitting ? (<h1>Login Successfully</h1>) : (<h1>fill to Login</h1>)
+
 export default App;
