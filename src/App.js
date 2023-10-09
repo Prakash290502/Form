@@ -3,33 +3,42 @@ import { Formik, Form, Field,ErrorMessage } from "formik";
 import * as Yup from 'yup'
 import { connect } from "react-redux";
 import { saveFormData } from "D:/Task/FormValidation/form/src/features/actions"
+import {   Routes,Route, Link, Outlet} from 'react-router-dom'
+import Display from "D:/Task/FormValidation/form/src/Display";
 
 class App extends React.Component {
-	render() { 
-        const { formSubmitted, saveFormData } = this.props;
-		return (
-			<div className="userDetails">				
-                <Formik
+    render() { 
+      const { formSubmitted, saveFormData, formData } = this.props;
+      
+      return (
+        <div className="userDetails">
+          
+          
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <>
+                  <Formik
                     initialValues={{ name: "", email: "", dob: "", password: "" }}
                     validationSchema={LoginSchema}
-                   onSubmit={(values, { setSubmitting }) => {
-  console.log(values);
-  saveFormData(values);
-  setTimeout(() => {
-    alert("Form Submitted...");
-    setSubmitting(false); // This is how you should use setSubmitting
-  }, 1000);
-}}
-
-                >            
-				{(props) => (
-	            <div>
-			    {console.log(props)}
-							<div className="row mb-5">
-								<div className="col-lg-12 text-center">
-									<h1 className="mt-5">Login Form</h1>
-								</div>
-							</div>
+                    onSubmit={(values, { setSubmitting }) => {
+                      console.log(values);
+                      saveFormData(values);
+                      setTimeout(() => {
+                        alert("Form Submitted...");
+                        setSubmitting(false);
+                      }, 1000);
+                    }}
+                  >
+                    {(props) => (
+                      <div>
+                        <div className="row mb-5">
+                          <div className="col-lg-12 text-center">
+                            <h1 className="mt-5">Login Form</h1>
+                          </div>
+                        </div>
+  
 							<Form>
 								<div className="form-group">
                                     <label htmlFor="name">Name</label>
@@ -96,25 +105,26 @@ class App extends React.Component {
 									>Submit
 									</button>
 									</Form>
-						</div>
-						)}
-				</Formik>
+                                    </div>
+                  )}
+                </Formik>
                 {formSubmitted ? (
-          <h1>Login Successfully</h1>
-        ) : (
-          <h1>Fill to Login</h1>
-        )}
-         {this.props.formData && (
-          <div>
-            
-            <pre>{JSON.stringify(this.props.formData, null, 2)}</pre>
-          </div>
-        )}
-			</div>
-		);
-	}
+                  <h1>submitted Successfully</h1>
+                ) : (
+                  <h1>Fill form</h1>
+                )}
+              </>
+              
+            }
+          />
+          <Route path="/formData" element={<Display formData={formData} />} />
+        </Routes>
+        <Link to='/formData'>Display FORM</Link>
+        <Outlet /> 
+      </div>
+    );
+  }
 }
-
 const mapStateToProps = (state) => ({
   formSubmitted: state.formSubmitted,
   formData: state.formData,
